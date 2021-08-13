@@ -1,0 +1,29 @@
+name: sync-freenom
+
+on:
+  schedule:
+    - cron:  "39 5 * * 2"
+  workflow_dispatch:
+  watch:
+    types: started
+
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v2
+      - name: init
+        run: |
+          git config --global user.name 'GitHub Actions' && git config --global user.email 'noreply@github.com'
+      - name: git clone luolongfei/freenom
+        run: |
+          git clone -b master https://github.com/luolongfei/freenom
+      - name: git push my/sync
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          directory: freemon
+          github_token: ${{ secrets.PAT }}
+          branch: freemon
+          force: true
