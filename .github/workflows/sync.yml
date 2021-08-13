@@ -19,11 +19,11 @@ jobs:
           git config --global user.name 'GitHub Actions' && git config --global user.email 'noreply@github.com'
       - name: git clone luolongfei/freenom
         run: |
-          git clone https://github.com/luolongfei/freenom
+          git clone -b master https://github.com/luolongfei/freenom
       - name: git push my/sync
         uses: ad-m/github-push-action@v0.6.0
         with:
-          directory: freemon
+          directory: master
           github_token: ${{ secrets.PAT }}
           branch: freemon
-          force: true
+          force: master
