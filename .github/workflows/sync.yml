@@ -23,7 +23,7 @@ jobs:
       - name: git push my/sync
         uses: ad-m/github-push-action@v0.6.0
         with:
-          directory: master
+          directory: freenom
           github_token: ${{ secrets.PAT }}
-          branch: freemon
-          force: master
+          branch: freenom
+          force: true
